@@ -139,6 +139,7 @@ git remote add upstream https://github.com/<original-owner>/<original-repo>
 and then pull like
 ```
 git pull upstream <branch-name>
+```
 
 I suggest doing a pull everytime before you start editing your files (assuming you're on a team). There might be conflicts but they are a pain to solve and I rarely ever face 'em because I am a neat boi ;D
 But yeah, I don't know how to deal with those. Learn from stackoverflow or youtube lol.
