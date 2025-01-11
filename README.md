@@ -3,7 +3,14 @@ First let's get this clear: <b>What is the difference between Git & GitHub?</b>
 So, Git, by definition, is a version control system but the way I like to say is that it is a tool to make <u>a collection of code (AKA a git repo)</u> so that migration, collaboration and branching (making different versions) is easy.
 GitHub on the other hand is a platform where you can host and manage your Git repositories.
 
-Now that we have this cleared, [download git](https://git-scm.com/downloads) or [build from source if you have too much chest hair or something](https://github.com/git/git/blob/master/INSTALL).
+Now that we have this cleared, [download git](https://git-scm.com/downloads) or [build from source if you have too much chest hair or something](https://github.com/git/git/blob/master/INSTALL) and make sure that it is added to PATH (look up how to add something to PATH if you don't know).
+
+Before we start, open terminal (or command prompt/powershell) and enter this:
+```
+git config --global user.name 'Your Name'
+git config --global user.email 'your@email.com'
+```
+This is only required once. If you don't enter, then git will ask for your name and email every time you try to make a commit or do something.
 
 ## What's in this lesson?
 Let's dive right into the practical work. First I will tell you how to clone a repo and contribute (which is what we mostly do) and after that I will also tell you how to push your code that you have already been working on.
@@ -28,7 +35,7 @@ After that, just make the edits to the code as you like. Add file, delete file, 
 $ git add .
 $ git commit -m "enter a message"
 ```
-- The `git add <filename>` adds the file that you are ready to be commited or pushed. `add .` means add everything, alternatively you can also use `git add --all`.
+- The `git add <filename>` adds the file that you are ready to be commited or pushed. `add .` means add everything in the current folder, alternatively you can also use `git add --all`.
 - The `git commit -m "enter message"` will update your Git repo (not on GitHub directly) with the files you added before. `-m "message"` is very important as that is used to say what updates those specific commit provides. It can be single line or multiple line. Some use it twice like to add a title and description like:
 ```
 git commit -m "Title" -m "Long description"
@@ -144,16 +151,44 @@ git pull upstream <branch-name>
 I suggest doing a pull everytime before you start editing your files (assuming you're on a team). There might be conflicts but they are a pain to solve and I rarely ever face 'em because I am a neat boi ;D
 But yeah, I don't know how to deal with those. Learn from stackoverflow or youtube lol.
 
+## Other useful things
+### `.gitignore` file
+You often have files or folders (like `.node_modules`) that you need to run a program or just cache files. Those need not be pushed because they are massive and useless. Those are/should be "generated" automatically when you run the program. You can just be careful and never add the files you don't want or you can be wiser and use a `.gitignore` file.
+`git` will ignore all the files and folders mentioned inside `.gitignore`. An example `.gitignore` file would look like:
+```
+ignore.exe
+useless/
+```
+The above `.gitignore` file will ignore the file `ignore.exe` and files inside the `useless` folder.
+**Note:** `.gitignore` ignores file relative to where it is present. i.e., it will ignore `ignore.exe` in the above example but not `assets/ignore.exe` (which is `ignore.exe` inside a folder named `assets`).
+
+### `git rm` command
+Deleting files is special in git. Git won't know that you have deleted a file even if you have already because git has cached the file (assuming you have `git add`ed it before).
+If you want to delete a file, I suggest you use the `git rm` command. This will not only delete the file from your system but also delete the file from git's cache. Example:
+```
+git rm file
+```
+If you only want to delete the file from cache but not the file on your system, then this command:
+```
+git rm --cached file
+```
+Same for folder tho' you may have to add the `-rf` flag like `git rm -rf folder`.
+
 ## Important commands
-There are more important commands that you can read from the web. Imma mention some common ones here:
-- `git pull`
-- `git clone`
-- `git branch`
-- `git checkout`
-- `git merge`
-- `git stash`
-- `git restore`:
+There are more important commands that you can read from the web. I'mma mention some common ones here:
+- `git add`: To add files or folders to let git track them.
+- `git branch`: To do stuff with branches.
+- `git checkout`: To change the current branch.
+- `git clone`: To clone a repo.
+- `git diff`: To compare files and changes on your terminal. I generally don't use it and suggest doing that from GitHub instead.
+- `git merge`: To merge branches.
+- `git pull`: To pull changes.
+- `git rebase`: Scary command which I have never used but could be quite helpful.
 - `git reset`: This is what you use to fall back to the last/given commit in case you f up. I do use `git reset --hard HEAD` often because I f up often :p
+- `git restore`: I have no idea what this does. Never used it.
+- `git rm`: Special git command to delete files & folders.
+- `git stash`: Essentially copy paste but for changes in file.
 
 ## That was it!
+One last tip, make smaller commits and commit often i.e., make smaller changes to files and then make a commit instead of changing multiple files at once and then commiting & pushing them. This makes it harder to track bugs.
 Open an issue on this repo if something is not working or if you have any questions that google could not answer. Star the repo and follow me if you appreciate me lol. k thx bye!
